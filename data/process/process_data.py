@@ -1,13 +1,18 @@
 # %%
 import json
 import pandas as pd
+from pathlib import Path
+
+# %%
+# setup
+BASE_DIR = Path(__file__).resolve().parent
 
 # part 1: process the entities
 ##########################################
 # %%
 
 # Load the JSON file
-data_path = '../esAppMod/tca_entities.json'
+data_path = BASE_DIR / '../esAppMod/tca_entities.json'
 with open(data_path, 'r') as file:
     data = json.load(file)
 
@@ -36,7 +41,7 @@ for entity in data["data"].items():
 df = pd.DataFrame(rows)
 
 # %%
-df.to_csv('entity.csv', index=False)
+df.to_csv(BASE_DIR / 'entity.csv', index=False)
 
 
 
@@ -46,7 +51,7 @@ df.to_csv('entity.csv', index=False)
 # import entity information
 
 # %%
-data_path = 'entity.csv'
+data_path = BASE_DIR / 'entity.csv'
 entity_df = pd.read_csv(data_path, skipinitialspace=True)
 id2label = {}
 for _, row in entity_df.iterrows():
@@ -54,7 +59,7 @@ for _, row in entity_df.iterrows():
 
 
 # Load the JSON file
-data_path = '../esAppMod/train.json'
+data_path = BASE_DIR / '../esAppMod/train.json'
 with open(data_path, 'r') as file:
     data = json.load(file)
 
@@ -82,13 +87,13 @@ train_df = pd.DataFrame(rows)
 train_class_set = set(train_df['entity_id'].to_list())
 
 # %%
-train_df.to_csv('train.csv', index=False)
+train_df.to_csv(BASE_DIR / 'train.csv', index=False)
 
 # part 3: process the test data
 ##########################################
 # %%
 # Load the JSON file
-data_path = '../esAppMod/infer.json'
+data_path = BASE_DIR / '../esAppMod/infer.json'
 with open(data_path, 'r') as file:
     data = json.load(file)
 
@@ -117,10 +122,10 @@ test_df = pd.DataFrame(rows)
 test_class_set = (set(test_df['entity_id'].to_list()))
 
 # %%
-test_df.to_csv('test.csv', index=False)
+test_df.to_csv(BASE_DIR / 'test.csv', index=False)
 
 # %%
 # this shows that the training data can be found in the train set
-test_class_set - train_class_set 
+# print(test_class_set - train_class_set )
 
 # %%
