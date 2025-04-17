@@ -3,8 +3,11 @@
 This repository uses language models (LM) to perform data standardization on
 variable item descriptions to give canonical item names.
 
-The dataset `esAppMod`, which is a collection of enterprise application terms,
-is sourced from
+This repo seeks to recreate the data standardization methods found in this
+[paper](https://doi.org/10.1109/access.2025.3555272). [[1]](#1) However, due to
+the confidential nature of the original dataset, an alternative dataset was
+source. The dataset `esAppMod`, which is a collection of enterprise application
+terms, was sourced from
 [tackle-container-advisor](https://github.com/konveyor/tackle-container-advisor).
 
 The application has both a `frontend` and a `backend`. The `backend` provides
@@ -52,6 +55,14 @@ python predict.py
 cat output.txt
 ```
 
+Alternatively, you can use a nearest-neighbors approach to check which train
+input is closest to the test input, and use that as the prediction instead.
+
+```python
+python similarity_prediction.py
+cat output_similarity.txt
+```
+
 To run the seq2seq section:
 
 ```python
@@ -94,3 +105,15 @@ To run:
 cd frontend
 yarn dev
 ```
+
+## References
+
+<a id="1">[1]</a> 
+H. Hwang, R. Wong, D. Lim, J. Kang and I. Joe, "Enhancing Maritime Data
+Integration for Platform Services With Sequence-to-Sequence Models and
+Statistical Refinement," in IEEE Access, vol. 13, pp. 58636-58648, 2025, doi:
+10.1109/ACCESS.2025.3555272. keywords: {Marine vehicles;Data models;Data
+integration;DSL;Biological system
+modeling;Accuracy;Transformers;Seaports;Interoperability;Computational
+modeling;Data collection;domain specific languages (DSL);sequence to sequence
+model;data platform}, 
